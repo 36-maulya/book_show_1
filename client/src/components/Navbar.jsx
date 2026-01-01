@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {assets} from '../assets/assets'
-import {MenuIcon,SearchIcon, Ticket, TicketPlus, XIcon} from 'lucide-react'
+import {MenuIcon,SearchIcon, Ticket, TicketPlus,LayoutDashboard, XIcon} from 'lucide-react'
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react'
-
+import { useAppContext } from '../context/AppContext'
 const Navbar = () => {
   const [isOpen,setIsOpen]= useState(false)
   const {user}=useUser()
   const {openSignIn}=useClerk()
   const navigate=useNavigate()
+  const { isAdmin } = useAppContext()
   return (
-    <div className='fixed top-0 left-0 z-50 w-full flex items-center justify-between px=6 md:px-16 lg:px-36 py-5'>
+    <div className='fixed top-0 left-0 z-50 w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5'>
     <Link to='/' className='max-md:flex-1'>
     <img src={assets.logo} alt="" className='w-36 h-auto'/>
     </Link>
@@ -32,8 +33,21 @@ const Navbar = () => {
       ) : (
         <UserButton>
           <UserButton.MenuItems>
-            <UserButton.Action label="My Bookings" labelIcon={<TicketPlus width={15}/>} onClick={()=>navigate('/my-bookings') }/>
-          </UserButton.MenuItems>
+              {/* Added: Admin Dashboard link inside UserButton (only shows if isAdmin is true) */}
+              {isAdmin && (
+                <UserButton.Action 
+                  label="Admin Dashboard" 
+                  labelIcon={<LayoutDashboard width={15} />} 
+                  onClick={() => navigate('/admin')} 
+                />
+              )}
+              
+              <UserButton.Action 
+                label="My Bookings" 
+                labelIcon={<TicketPlus width={15} />} 
+                onClick={() => navigate('/my-bookings')} 
+              />
+            </UserButton.MenuItems>
         </UserButton>
       )
       }

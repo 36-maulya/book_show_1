@@ -1,10 +1,21 @@
-import { User } from "@clerk/express";
-import Booking from "../models/Booking"
+import { clerkClient } from "@clerk/express";
+import Booking from "../models/Booking.js"
 import Show from "../models/Show.js";
 
 //API to check if user is admin
-export const isAdmin=async(req,res)=>{
-    res.json({success:true,isAdmin:true})
+// API to check if user is admin
+export const isAdmin = async (req, res) => {
+    try {
+        // Clerk attaches user info to req.auth
+        const { sessionClaims } = req.auth;
+        
+        // Check if the role in metadata is admin
+        const isAdmin = sessionClaims?.metadata?.role === 'admin';
+
+        res.json({ success: true, isAdmin });
+    } catch (error) {
+        res.json({ success: false, isAdmin: false, message: error.message });
+    }
 }
 
 //API to get dashboard data
@@ -14,7 +25,7 @@ export const getDashboardData=async(req,res)=>{
         const activeShows=await Show.find({showDateTime:{$gte:new Date()}}).
         populate('movie');
 
-        const totalUser=await User.countDocuments();
+        const totalUser = await clerkClient.users.getCount();
         const dashboardData={
             totalBookings:bookings.length,
             totalRevenue:bookings.reduce((acc,booking)=>acc+booking.amount,0),
