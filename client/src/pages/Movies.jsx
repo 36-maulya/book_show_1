@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import MovieCard from '../components/MovieCard'
 import BlurCircle from '../components/BlurCircle'
+import { useAppContext } from '../context/AppContext'
 
 const Movies = () => {
+  const {shows}=useAppContext()
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -34,7 +36,7 @@ const Movies = () => {
       <BlurCircle bottom="50px" right="50px"/>
       <h1 className='text-lg font-medium my-4'>Now Showing</h1>
       <div className='flex flex-wrap max-sm:justify-center gap-8'>
-        {movies.map((movie) => (
+        {shows.map((movie) => (
           <MovieCard movie={movie} key={movie._id}/>
         ))}
       </div>
