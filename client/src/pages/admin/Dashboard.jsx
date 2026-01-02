@@ -5,10 +5,10 @@ import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import BlurCircle from '../../components/BlurCircle';
 import { dateFormat } from '../../lib/dateFormat';
-
+import { useAppContext } from '../../context/AppContext';
 const Dashboard = () => {
+  const {axios,getToken,user,image_base_url}=useAppContext()
   const currency = import.meta.env.VITE_CURRENCY;
-
   const [dashboardData,setDashboardData]=useState({
     totalBookings:0,
     totalRevenue:0,

@@ -7,10 +7,12 @@ import { kConverter } from '../../lib/kConverter'
 import { toast ,ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '@clerk/clerk-react'
+import { useAppContext } from '../../context/AppContext'
 
 const AddShows = () => {
+  const{axios,getToken,user,image_base_url}=useAppContext()
   const currency = import.meta.env.VITE_CURRENCY
-  const { getToken } = useAuth(); 
+  
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [dateTimeSelection, setDateTimeSelection] = useState({});
@@ -106,8 +108,11 @@ const AddShows = () => {
   }
 
   useEffect(() => {
-    fetchNowPlayingMovies();
-  }, []);
+    if(user){
+       fetchNowPlayingMovies();
+    }
+   
+  }, [user]);
 
   return nowPlayingMovies.length > 0 ? (
     <div className="pb-20">
@@ -123,7 +128,7 @@ const AddShows = () => {
                  onClick={() => setSelectedMovie(movie._id)}>
               
               <div className={`relative rounded-lg overflow-hidden border-2 ${selectedMovie === movie._id ? 'border-primary' : 'border-transparent'}`}>
-                <img src={movie.poster_path} alt={movie.title} className='w-full object-cover brightness-90' />
+                <img src={image_base_url+movie.poster_path} alt={movie.title} className='w-full object-cover brightness-90' />
                 <div className='text-sm flex items-center justify-between p-2 bg-black/70 w-full absolute bottom-0 left-0'>
                   <p className='flex items-center gap-1 text-gray-400'>
                     <StarIcon className='w-4 h-4 text-primary fill-primary' />
