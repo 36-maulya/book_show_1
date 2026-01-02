@@ -10,7 +10,8 @@ import Favorite from './pages/Favorite'
 import {Toaster} from 'react-hot-toast'
 import Footer from './components/Footer'
 import Layout from './pages/admin/Layout'
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from './pages/admin/Dashboard'
 import AddShows from './pages/admin/AddShows'
 import ListShows from './pages/admin/ListShows'
@@ -23,6 +24,7 @@ const App = () => {
   const {user ,isAdmin}=useAppContext()
   return (
     <>
+    <ToastContainer theme="dark" />
     <Toaster/>
       {!isAdminRoute && <NavBar/>}
       <Routes>

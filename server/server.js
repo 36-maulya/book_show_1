@@ -22,6 +22,10 @@ app.use(cors())
 app.use(clerkMiddleware())
 
 //API Routes
+app.use((req, res, next) => {
+  console.log(`Incoming Request: ${req.method} ${req.url}`);
+  next();
+});
 app.get('/',(req,res)=>res.send('Server is Live!'))
 app.use('/api/inngest',serve({ client: inngest, functions }))
 app.use('/api/show',showRouter)
