@@ -4,14 +4,14 @@ import Show from "../models/Show.js";
 
 //API to check if user is admin
 // API to check if user is admin
+// adminController.js
+// adminController.js
 export const isAdmin = async (req, res) => {
     try {
-        // Clerk attaches user info to req.auth
-        const { sessionClaims } = req.auth;
+        // FIX: Change req.auth to req.auth()
+        const { sessionClaims } = req.auth(); 
         
-        // Check if the role in metadata is admin
         const isAdmin = sessionClaims?.metadata?.role === 'admin';
-
         res.json({ success: true, isAdmin });
     } catch (error) {
         res.json({ success: false, isAdmin: false, message: error.message });
@@ -19,24 +19,28 @@ export const isAdmin = async (req, res) => {
 }
 
 //API to get dashboard data
-export const getDashboardData=async(req,res)=>{
-    try{
-        const bookings=await Booking.find({isPaid:true});
-        const activeShows=await Show.find({showDateTime:{$gte:new Date()}}).
-        populate('movie');
+// server/controllers/adminController.js
+export const getDashboardData = async (req, res) => {
+  try {
+    const bookings = await Booking.find({ isPaid: true });
+    
+    // TEMPORARY: Remove the date filter to see if data appears
+    const activeShows = await Show.find({}).populate('movie'); 
 
-        const totalUser = await clerkClient.users.getCount();
-        const dashboardData={
-            totalBookings:bookings.length,
-            totalRevenue:bookings.reduce((acc,booking)=>acc+booking.amount,0),
-            activeShows,
-            totalUser
-        }
-        res.json({success:true,dashboardData})
-    }catch(error){
-        console.error(error);
-        res.json({success:true,message:error.message})
-    }
+    const totalUser = await clerkClient.users.getCount();
+    
+    res.json({
+      success: true,
+      dashboardData: {
+        totalBookings: bookings.length,
+        totalRevenue: bookings.reduce((acc, b) => acc + b.amount, 0),
+        activeShows,
+        totalUser
+      }
+    });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
 }
 
 //API to get all shows

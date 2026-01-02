@@ -21,7 +21,7 @@ import { SignIn } from '@clerk/clerk-react'
 
 const App = () => {
   const isAdminRoute = useLocation().pathname.startsWith('/admin')
-  const {user ,isAdmin}=useAppContext()
+  const {user ,isAdmin,loading}=useAppContext()
   return (
     <>
     <ToastContainer theme="dark" />
@@ -34,20 +34,24 @@ const App = () => {
         <Route path='/movies/:id/:date' element={<SeatLayout/>}/>
         <Route path='/my-bookings' element={<MyBookings/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
-        <Route path='/admin/*' element={user && isAdmin ? <Layout/>: (
-          <div className='min-h-screen flex justify-center items-center'>
-            <SignIn fallbackRedirectUrl={'/admin'}/>
-          </div>
-        )}>
-        <Route index element={<Dashboard/>}/>
-        <Route path="add-shows" element={<AddShows/>}/>
-        <Route path="list-shows" element={<ListShows/>}/>
-        <Route path="list-bookings" element={<ListBookings/>}/>
+        <Route path='/admin/*' element={
+          // 1. Wait for loading to finish
+          loading ? <div className='min-h-screen flex items-center justify-center'>Loading...</div> : 
+          // 2. Once loaded, check if user is admin
+          user && isAdmin ? <Layout/> : (
+            <div className='min-h-screen flex justify-center items-center'>
+              <SignIn fallbackRedirectUrl={'/admin'}/>
+            </div>
+          )
+        }>
+          <Route index element={<Dashboard/>}/>
+          <Route path="add-shows" element={<AddShows/>}/>
+          <Route path="list-shows" element={<ListShows/>}/>
+          <Route path="list-bookings" element={<ListBookings/>}/>
         </Route>
       </Routes>
       {!isAdminRoute && <Footer/>}
     </>
   )
 }
-
-export default App
+export default App;

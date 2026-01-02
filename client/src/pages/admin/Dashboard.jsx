@@ -6,8 +6,11 @@ import Title from '../../components/admin/Title';
 import BlurCircle from '../../components/BlurCircle';
 import { dateFormat } from '../../lib/dateFormat';
 import { useAppContext } from '../../context/AppContext';
+import { toast } from 'react-toastify';
+import { useAuth, useUser } from '@clerk/clerk-react';
 const Dashboard = () => {
   const {axios,getToken,user,image_base_url}=useAppContext()
+  const { isLoaded } = useUser();
   const currency = import.meta.env.VITE_CURRENCY;
   const [dashboardData,setDashboardData]=useState({
     totalBookings:0,
@@ -25,7 +28,7 @@ const Dashboard = () => {
   {
   title: "Total Revenue",
   value: `${currency}${dashboardData.totalRevenue ?? "0"}`,
-  icon: () => <span className="text-xl font-bold">₹</span>,
+  icon: CircleDollarSignIcon,
 },
 
   {
@@ -40,13 +43,34 @@ const Dashboard = () => {
   },
 ];
 
-  const fetchDashboardData=async()=>{
-    setDashboardData(dummyDashboardData)
-    setLoading(false)
-  };
+  const fetchDashboardData = async () => {
+  try {
+    setLoading(true);
+    const authToken = await getToken();
+    
+    // DEBUG: If this logs null/undefined, your frontend isn't logged in!
+    console.log("Token sent to server:", authToken); 
+
+    const { data } = await axios.get('/api/admin/dashboard', {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+
+    if (data.success) {
+      setDashboardData(data.dashboardData);
+    }
+  } catch (error) {
+    console.error("Dashboard Fetch Error:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
   useEffect(()=>{
-    fetchDashboardData();
-  },[]);
+    if(isLoaded && user){
+      fetchDashboardData();
+    }
+    
+  },[isLoaded,user]);
 
   return !loading ? (
     <>
