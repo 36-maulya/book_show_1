@@ -19,7 +19,16 @@ const checkSeatsAvailability=async(showId,selectedSeats)=>{
 
 export const createBooking=async(req,res)=>{
     try{
-        const {userId}=req.auth();
+        const auth = req.auth?.();
+if (!auth || !auth.userId) {
+  return res.status(401).json({
+    success: false,
+    message: "User not authenticated"
+  });
+}
+
+const userId = auth.userId;
+
         const {showId,selectedSeats}=req.body;
         const {origin}=req.headers;
 
@@ -47,7 +56,7 @@ export const createBooking=async(req,res)=>{
         //Script Gateway Initialize
         res.json({success:true,message:"Booked successfully"})
     }
-    catch{
+    catch(error){
         console.log(error.message);
         res.json({success:false,message:error.message})
     }
