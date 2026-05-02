@@ -29,7 +29,7 @@ if (!auth || !auth.userId) {
 
 const userId = auth.userId;
 
-        const {showId,selectedSeats}=req.body;
+        const {showId,selectedSeats,paymentMethod,last4}=req.body;
         const {origin}=req.headers;
 
         //Check if the seat is available for the selected show
@@ -40,21 +40,30 @@ const userId = auth.userId;
         //Get the show details
         const showData=await Show.findById(showId).populate('movie');
 
-        //Create new booking
+        //Create new booking with payment info
         const booking=await Booking.create({
             user:userId,
             show:showId,
             amount:showData.showPrice*selectedSeats.length,
-            bookedSeats:selectedSeats
+            bookedSeats:selectedSeats,
+            isPaid: true, // Mark as paid for demo
+            paymentMethod: paymentMethod || 'demo',
+            paymentLink: last4 ? `****${last4}` : null
         })
+        
+        //Mark seats as occupied
         selectedSeats.map((seat)=>{
             showData.occupiedSeats[seat]=userId
         })
         showData.markModified('occupiedSeats');
         await showData.save();
 
-        //Script Gateway Initialize
-        res.json({success:true,message:"Booked successfully"})
+        //Return success with booking details
+        res.json({
+            success:true,
+            message:"Booked successfully! Your tickets are confirmed.",
+            bookingId: booking._id
+        })
     }
     catch(error){
         console.log(error.message);

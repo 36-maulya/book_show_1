@@ -71,22 +71,24 @@ const SeatLayout = () => {
     }
   }
   
-  const bookTickets=async()=>{
+const bookTickets=async()=>{
     try {
       if(!user){
         return toast.error('Please login to proceed')
       }
       if(!selectedTime || !selectedSeats.length)
         return toast.error('Please select a time and seats')
-      const {data}=await axios.post('/api/booking/create',{showId:
-        selectedTime.showId,selectedSeats
-      },{headers:{Authorization:`Bearer ${await getToken()}`}})
-      if(data.success){
-        toast.success(data.message)
-        navigate('/my-bookings')
-      }else{
-        toast.error(data.message)
-      }
+      
+      // Navigate to payment page with booking details
+      const showPrice = show?.show?.showPrice || 150 // Default price if not available
+      navigate('/payment', {
+        state: {
+          showId: selectedTime.showId,
+          selectedSeats,
+          showData: show,
+          totalAmount: showPrice * selectedSeats.length
+        }
+      })
     } catch (error) {
       toast.error(error.message)
     }
