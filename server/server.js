@@ -19,10 +19,7 @@ await connectDB()
 //Middleware
 app.use(express.json())
 app.use(cors())
-app.use(clerkMiddleware({
-  publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
-  secretKey: process.env.CLERK_SECRET_KEY,
-}))
+app.use(clerkMiddleware())
 
 //API Routes
 app.use((req, res, next) => {
