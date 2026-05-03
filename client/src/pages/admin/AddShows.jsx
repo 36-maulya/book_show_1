@@ -22,7 +22,7 @@ const AddShows = () => {
 
   const fetchNowPlayingMovies = async () => {
     try {
-      const { data } = await axios.get('http://localhost:3000/api/show/now-playing');
+      const { data } = await axios.get('/api/show/now-playing');
       if (data.success) {
         setNowPlayingMovies(data.movies);
       }
@@ -84,7 +84,7 @@ const AddShows = () => {
 
       console.log("Sending Request to Backend...", payload);
 
-      const { data } = await axios.post('http://localhost:3000/api/show/add', payload, {
+      const { data } = await axios.post('/api/show/add', payload, {
         headers: { 
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}` 
