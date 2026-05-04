@@ -32,7 +32,9 @@
 <img src="./screenshot/home3.png" width="800"/>
 <img src="./screenshot/home4.png" width="800"/>
 ### 🎬 Movie Listing
-![Movies](./screenshots/movies.png)
+<img src="./screenshot/movie1.png" width="800"/>
+<img src="./screenshot/movie2.png" width="800"/>
+<img src="./screenshot/movie3.png" width="800"/>
 
 ### 📄 Movie Details
 ![Details](./screenshots/details.png)
