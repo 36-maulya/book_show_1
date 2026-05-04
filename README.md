@@ -27,16 +27,10 @@
 
 ### 🏠 Home Page
 
-<p align="center">
-  <img src="./screenshot/home1.png" width="45%"/>
-  <img src="./screenshot/home2.png" width="45%"/>
-</p>
-
-<p align="center">
-  <img src="./screenshot/home3.png" width="45%"/>
-  <img src="./screenshot/home4.png" width="45%"/>
-</p>
-
+<img src="./screenshot/home1.png" width="800"/>
+<img src="./screenshot/home2.png" width="800"/>
+<img src="./screenshot/home3.png" width="800"/>
+<img src="./screenshot/home4.png" width="800"/>
 ### 🎬 Movie Listing
 ![Movies](./screenshots/movies.png)
 
