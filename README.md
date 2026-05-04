@@ -23,6 +23,50 @@
 
 ---
 
+## 📸 Screenshots
+
+### 🏠 Home Page
+### 🏠 Home Page
+
+<p align="center">
+  <img src="./screenshots/home1.png" width="45%"/>
+  <img src="./screenshots/home2.png" width="45%"/>
+</p>
+
+<p align="center">
+  <img src="./screenshots/home3.png" width="45%"/>
+  <img src="./screenshots/home4.png" width="45%"/>
+</p>
+
+### 🎬 Movie Listing
+![Movies](./screenshots/movies.png)
+
+### 📄 Movie Details
+![Details](./screenshots/details.png)
+
+### 🪑 Seat Selection
+![Seats](./screenshots/seats.png)
+
+### 🎟️ Booking Page
+![Booking](./screenshots/booking.png)
+
+### 📂 User Bookings
+![Bookings](./screenshots/history.png)
+
+### 👨‍💼 Admin Dashboard
+![Admin](./screenshots/admin.png)
+
+---
+
+## 🎥 Demo (Optional but Powerful)
+
+👉 Add a screen recording GIF here (very important for recruiters)
+
+Example:
+![Demo](./screenshots/demo.gif)
+
+---
+
 ## 🏗️ System Architecture
 
 Client (React) → REST API (Node.js/Express) → Database (MongoDB)
@@ -58,20 +102,20 @@ Deployment: Vercel, Render
 
 ## 📁 Project Structure
 
-book_show_1/
-├── client/      # React Frontend  
-├── server/      # Node.js Backend  
+book_show_1/  
+├── client/  
+├── server/  
 └── README.md  
 
 ---
 
 ## ⚡ Getting Started
 
-### 1. Clone Repo
+### Clone Repo
 git clone https://github.com/36-maulya/book_show_1.git  
 cd book_show_1  
 
-### 2. Install Dependencies
+### Install Dependencies
 
 Frontend  
 cd client  
@@ -83,9 +127,9 @@ npm install
 
 ---
 
-### 3. Environment Variables
+### Environment Variables
 
-Create `.env` in server folder:
+Create `.env` in server:
 
 MONGO_URI=your_mongodb_uri  
 JWT_SECRET=your_secret  
@@ -93,7 +137,7 @@ PORT=5000
 
 ---
 
-### 4. Run Locally
+### Run Locally
 
 Backend  
 cd server  
@@ -105,31 +149,22 @@ npm run dev
 
 ---
 
-## 📡 API Overview
-
-POST /api/auth/register  
-POST /api/auth/login  
-GET /api/movies  
-POST /api/bookings  
-
----
-
 ## 📈 Why This Project Stands Out
 
 - 💡 Real-world application  
 - 🧩 Full-stack implementation  
-- 🔄 Covers CRUD + Auth  
-- 📦 Deployment ready  
-- 🎯 Strong portfolio project  
+- 🔄 CRUD + Authentication  
+- 📦 Production-ready  
+- 🎯 Strong placement project  
 
 ---
 
 ## 🚀 Future Enhancements
 
-- 💳 Payment Integration (Stripe / Razorpay)  
-- 🎥 Movie trailers  
+- 💳 Payment Integration  
+- 🎥 Trailer support  
 - ⭐ Ratings & reviews  
-- 📱 Mobile improvements  
+- 📱 Mobile optimization  
 
 ---
 
