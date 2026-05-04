@@ -66,15 +66,6 @@
 
 ---
 
-## 🎥 Demo (Optional but Powerful)
-
-👉 Add a screen recording GIF here (very important for recruiters)
-
-Example:
-![Demo](./screenshots/demo.gif)
-
----
-
 ## 🏗️ System Architecture
 
 Client (React) → REST API (Node.js/Express) → Database (MongoDB)
