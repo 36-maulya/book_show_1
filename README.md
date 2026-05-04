@@ -31,7 +31,9 @@
 <img src="./screenshot/home2.png" width="800"/>
 <img src="./screenshot/home3.png" width="800"/>
 <img src="./screenshot/home4.png" width="800"/>
+
 ### 🎬 Movie Listing
+
 <img src="./screenshot/movie1.png" width="800"/>
 <img src="./screenshot/movie2.png" width="800"/>
 <img src="./screenshot/movie3.png" width="800"/>
