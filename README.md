@@ -39,19 +39,30 @@
 <img src="./screenshot/movie3.png" width="800"/>
 
 ### 📄 Movie Details
-![Details](./screenshots/details.png)
+
+<img src="./screenshot/movieD1.png" width="800"/>
+<img src="./screenshot/movieD2.png" width="800"/>
+<img src="./screenshot/movieD3.png" width="800"/>
 
 ### 🪑 Seat Selection
-![Seats](./screenshots/seats.png)
+
+<img src="./screenshot/seat1.png" width="800"/>
 
 ### 🎟️ Booking Page
-![Booking](./screenshots/booking.png)
+
+<img src="./screenshot/pay1.png" width="800"/>
 
 ### 📂 User Bookings
-![Bookings](./screenshots/history.png)
+
+<img src="./screenshot/user.png" width="800"/>
 
 ### 👨‍💼 Admin Dashboard
-![Admin](./screenshots/admin.png)
+
+<img src="./screenshot/admin1.png" width="800"/>
+<img src="./screenshot/admin2.png" width="800"/>
+<img src="./screenshot/admin3.png" width="800"/>
+<img src="./screenshot/admin4.png" width="800"/>
+<img src="./screenshot/admin5.png" width="800"/>
 
 ---
 
